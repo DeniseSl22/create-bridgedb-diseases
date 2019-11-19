@@ -127,10 +127,10 @@ new File("names2wikidata.tsv").eachLine { line,number ->
   if (number == 1) return // skip the first line
 
   fields = line.split("\t")
-  if (fields.length >= 3) {
+  if (fields.length >= 2) {
     rootid = fields[0].replace("<","").replace(">","").substring(31)
-    key = fields[1].trim()
-    synonym = fields[2].trim().replace("\"","").replace("@en","")
+    //key = fields[1].trim()
+    synonym = fields[1].trim().replace("\"","").replace("@en","")
     Xref ref = new Xref(rootid, wikidataDS);
     if (!genesDone.contains(ref.toString())) {
       addError = database.addGene(ref);
@@ -144,13 +144,13 @@ new File("names2wikidata.tsv").eachLine { line,number ->
     if (synonym.length() > 0 && !synonym.equals(rootid)) {
       println "Adding synonym: " + synonym
       addAttribute(database, ref, "Symbol", synonym)
-      addXRef(database, ref, key, inchikeyDS, genesDone, linksDone);
+      //addXRef(database, ref, key, inchikeyDS, genesDone, linksDone);
     } else {
       println "Not adding synonym: " + synonym
     }
-    if (key.length() > 0) {
-      addAttribute(database, ref, "InChIKey", key);
-    }
+    //if (key.length() > 0) {
+    //  addAttribute(database, ref, "InChIKey", key);
+    //}
   }
   counter++
   if (counter % commitInterval == 0) {
