@@ -31,6 +31,7 @@ blacklist = new HashSet<String>();
 //blacklist.add("C00350") //Example of blacklist item.
 
 ////Registering Datasources to create mappings
+wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
 omimDS = BioDataSource.OMIM //SysCode: Om
 //doDS = BioDataSource.DISEASE_ONTOLOGY //Not part of BridgeDb yet!!
 //cuiDS = BioDataSource.UMLS_CUI //Not part of BridgeDb yet!!
