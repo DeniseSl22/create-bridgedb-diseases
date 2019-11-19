@@ -17,7 +17,7 @@ commitInterval = 500
 genesDone = new java.util.HashSet();
 linksDone = new java.util.HashSet();
 
-unitReport = new File("creation.xml")
+unitReport = new File("creationNEW.xml")
 // unitReport << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 unitReport << "<testsuite tests=\"12\">\n"
 
