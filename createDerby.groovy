@@ -22,47 +22,29 @@ unitReport = new File("creation.xml")
 unitReport << "<testsuite tests=\"12\">\n"
 
 GdbConstruct database = GdbConstructImpl3.createInstance(
-  "hmdb_chebi_wikidata_metabolites", new DataDerby(), DBConnector.PROP_RECREATE
+  "wikidata_diseases", new DataDerby(), DBConnector.PROP_RECREATE
 );
 database.createGdbTables();
 database.preInsert();
 
 blacklist = new HashSet<String>();
-blacklist.add("C00350")
-blacklist.add("C00157")
-blacklist.add("C00422")
-blacklist.add("C00165")
-blacklist.add("C02530")
-blacklist.add("C00416")
-blacklist.add("C02737")
-blacklist.add("363-24-6")
-blacklist.add("104404-17-3")
-blacklist.add("CHEBI:17636")
-blacklist.add("HMDB0000912") // see bug #6
-blacklist.add("HMDB00912") // see bug #6
+//blacklist.add("C00350") //Example of blacklist item.
 
-//inchiDS = DataSource.register ("Cin", "InChI").asDataSource()
-inchikeyDS = DataSource.register ("Ik", "InChIKey").asDataSource()
-chemspiderDS = DataSource.register ("Cs", "Chemspider").asDataSource()
-casDS = BioDataSource.CAS
-pubchemDS = BioDataSource.PUBCHEM_COMPOUND
-chebiDS = BioDataSource.CHEBI
-keggDS = BioDataSource.KEGG_COMPOUND
-keggDrugDS = DataSource.register ("Kd", "KEGG Drug").asDataSource()
-wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
-lmDS = DataSource.register ("Lm", "LIPID MAPS").asDataSource()
-knapsackDS = DataSource.register ("Cks", "KNApSAcK").asDataSource()
-dtxDS = DataSource.register ("Ect", "EPA CompTox").asDataSource()
-// drugbankDS = BioDataSource.DRUGBANK
-//iupharDS = DataSource.register ("Gpl", "Guide to Pharmacology").asDataSource() 
-//chemblDS = DataSource.register ("Cl", "ChEMBL compound").asDataSource() 
+////Registering Datasources to create mappings
+omimDS = BioDataSource.OMIM //SysCode: Om
+//doDS = BioDataSource.DISEASE_ONTOLOGY //Not part of BridgeDb yet!!
+//cuiDS = BioDataSource.UMLS_CUI //Not part of BridgeDb yet!!
+//orphaDS = BioDataSource.ORPHANET //Not part of BridgeDb yet!!
+//meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!!
+
+//chemblDS = DataSource.register ("Cl", "ChEMBL compound").asDataSource() //example registry when DataSource is not supported in BridgeDb yet.
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
-database.setInfo("DATASOURCENAME", "HMDB-CHEBI-WIKIDATA");
-database.setInfo("DATASOURCEVERSION", "HMDB4.0.20180929-CHEBI170-WIKIDATA20181224" + dateStr);
-database.setInfo("DATATYPE", "Metabolite");
-database.setInfo("SERIES", "standard_metabolite");
+database.setInfo("DATASOURCENAME", "WIKIDATA");
+database.setInfo("DATASOURCEVERSION", "WIKIDATA" + dateStr);
+database.setInfo("DATATYPE", "Disease"); //Not sure if this cause trouble later on...
+database.setInfo("SERIES", "standard_diseases"); //Not sure if this cause trouble later on...
 
 def addXRef(GdbConstruct database, Xref ref, String node, DataSource source, Set genesDone, Set linkesDone) {
    id = node.trim()
@@ -99,11 +81,11 @@ def addAttribute(GdbConstruct database, Xref ref, String key, String value) {
    }
 }
 
-def cleanKey(String inchikey) {
-   String cleanKey = inchikey.trim()
-   if (cleanKey.startsWith("InChIKey=")) cleanKey = cleanKey.substring(9)
-   cleanKey
-}
+//def cleanKey(String inchikey) {
+//   String cleanKey = inchikey.trim()
+//   if (cleanKey.startsWith("InChIKey=")) cleanKey = cleanKey.substring(9)
+//   cleanKey
+//} //Shouldn't be needed, since we're working with diseases....
 
 // load the HMDB content
 counter = 0
