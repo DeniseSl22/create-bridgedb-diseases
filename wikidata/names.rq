@@ -1,23 +1,23 @@
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-SELECT ?compoundRes ?key ?compoundResLabel WITH {
-  SELECT ?compoundRes
+SELECT ?diseaseRes ?diseaseResLabel WITH {
+  SELECT ?diseaseRes
   WHERE {
-    { ?compoundRes p:P31/ps:P31 wd:Q11173 }
+    { ?diseaseRes p:P31/ps:P31 wd:Q12136 }
     UNION
-    { ?compoundRes p:P31/ps:P31 wd:Q36496 }
+    { ?diseaseRes p:P31/ps:P31 wd:Q18123741}
+     UNION
+    { ?diseaseRes p:P31/ps:P31 wd:Q929833}
     UNION
-    { ?compoundRes p:P31/ps:P31 wd:Q79529 }
+    { ?diseaseRes p:P279/ps:P279 wd:Q12136 }
     UNION
-    { ?compoundRes p:P279/ps:P279 wd:Q11173 }
+    { ?diseaseRes p:P279/ps:P279 wd:Q18123741 }
     UNION
-    { ?compoundRes p:P279/ps:P279 wd:Q79529 }
+    { ?diseaseRes p:P279/ps:P279 wd:Q929833 }
   }
 } AS %RESULTS {
   INCLUDE %RESULTS
-  OPTIONAL { ?compoundRes wdt:P235 ?key }
   OPTIONAL {
-    ?compoundRes rdfs:label ?compoundResLabel
-    FILTER((LANG(?compoundResLabel)) = "en")
+    ?diseaseRes rdfs:label ?diseaseResLabel
+    FILTER((LANG(?diseaseResLabel)) = "en")
   }
 }
-
