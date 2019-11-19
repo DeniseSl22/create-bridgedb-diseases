@@ -33,12 +33,11 @@ blacklist = new HashSet<String>();
 ////Registering Datasources to create mappings
 wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
 omimDS = BioDataSource.OMIM //SysCode: Om
+doDS = DataSource.register ("Do", "Disease Ontology").asDataSource()
 //doDS = BioDataSource.DISEASE_ONTOLOGY //Not part of BridgeDb yet!!
 //cuiDS = BioDataSource.UMLS_CUI //Not part of BridgeDb yet!!
 //orphaDS = BioDataSource.ORPHANET //Not part of BridgeDb yet!!
 //meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!!
-
-//chemblDS = DataSource.register ("Cl", "ChEMBL compound").asDataSource() //example registry when DataSource is not supported in BridgeDb yet.
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
@@ -120,6 +119,38 @@ new File("omim2wikidata.csv").eachLine { line,number ->
   }
 }
 //unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
+
+
+// Disease Ontology IDs
+counter = 0
+error = 0
+new File("do2wikidata.csv").eachLine { line,number ->
+  if (number == 1) return // skip the first line
+
+  fields = line.split(",")
+  rootid = fields[0].substring(31)
+  Xref ref = new Xref(rootid, wikidataDS);
+  if (!genesDone.contains(ref.toString())) {
+    addError = database.addGene(ref);
+    if (addError != 0) println "Error (addGene): " + database.recentException().getMessage()
+    error += addError
+    linkError = database.addLink(ref,ref);
+    if (linkError != 0) println "Error (addLinkItself): " + database.recentException().getMessage()
+    error += linkError
+    genesDone.add(ref.toString())
+  }
+
+  // add external identifiers
+  addXRef(database, ref, fields[1], doDS, genesDone, linksDone);
+
+  counter++
+  if (counter % commitInterval == 0) {
+    println "Info: errors: " + error + " (DiseaseOntology)"
+    database.commit()
+  }
+}
+//unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
+
 
 // Wikidata names
 counter = 0
