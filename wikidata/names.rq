@@ -1,5 +1,5 @@
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-SELECT DISTINCT ?diseaseRes ?diseaseResLabel WITH {
+SELECT ?diseaseRes ?diseaseResLabel WITH {
   SELECT ?diseaseRes
   WHERE {
     { ?diseaseRes p:P31/ps:P31 wd:Q12136 }
