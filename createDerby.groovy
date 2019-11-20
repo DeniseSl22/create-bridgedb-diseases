@@ -33,10 +33,9 @@ blacklist = new HashSet<String>();
 ////Registering Datasources to create mappings
 wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
 omimDS = BioDataSource.OMIM //SysCode: Om
-doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode Not part of BridgeDb yet!!
-
-//cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
-//cuiDS = BioDataSource.UMLS_CUI //Not part of BridgeDb yet!!
+doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
+cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode Not part of BridgeDb yet!! 
+//cuiDS = BioDataSource.UMLS_CUI //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
 //orphaDS = BioDataSource.ORPHANET //Not part of BridgeDb yet!!
 //meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!!
 
@@ -81,13 +80,6 @@ def addAttribute(GdbConstruct database, Xref ref, String key, String value) {
      }
    }
 }
-
-//def cleanKey(String inchikey) {
-//   String cleanKey = inchikey.trim()
-//   if (cleanKey.startsWith("InChIKey=")) cleanKey = cleanKey.substring(9)
-//   cleanKey
-//} //Shouldn't be needed, since we're working with diseases....
-
 
 //// load the Wikidata content
 
