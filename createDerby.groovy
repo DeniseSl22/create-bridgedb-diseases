@@ -34,9 +34,9 @@ blacklist = new HashSet<String>();
 wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
 omimDS = BioDataSource.OMIM //SysCode: Om
 doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode Not part of BridgeDb yet!! 
-//orphaDS = BioDataSource.ORPHANET //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
-//meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!!
+cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
+orphaDS = BioDataSource.ORPHANET //Not part of BridgeDb yet!! 
+//meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
