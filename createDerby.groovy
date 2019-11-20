@@ -171,7 +171,7 @@ new File("cui2wikidata.csv").eachLine { line,number ->
     println "Info: errors: " + error + " (UMLSCUI)"
     database.commit()
   }
- }
+}
 //unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
 
 
