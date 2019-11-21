@@ -1,0 +1,20 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?diseaseRes ?mesh WITH {
+  SELECT ?diseaseRes
+  WHERE {
+    { ?diseaseRes p:P31/ps:P31 wd:Q12136 }
+    UNION
+    { ?diseaseRes p:P31/ps:P31 wd:Q18123741}
+     UNION
+    { ?diseaseRes p:P31/ps:P31 wd:Q929833}
+    UNION
+    { ?diseaseRes p:P279/ps:P279 wd:Q12136 }
+    UNION
+    { ?diseaseRes p:P279/ps:P279 wd:Q18123741 }
+    UNION
+    { ?diseaseRes p:P279/ps:P279 wd:Q929833 }
+  }
+} AS %RESULTS {
+  INCLUDE %RESULTS 
+    ?diseaseRes wdt:P486 ?mesh
+   }
