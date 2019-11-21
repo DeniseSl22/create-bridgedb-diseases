@@ -53,6 +53,7 @@ However, you can also use the below curl command line operations.
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/do.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o do2wikidata.csv
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/cui.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o cui2wikidata.csv
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/orpha.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o orpha2wikidata.csv
+  curl -H "Accept: text/csv" --data-urlencode query@wikidata/mesh.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o mesh2wikidata.csv
   ```
 
 4.2 Get Disease Labels
