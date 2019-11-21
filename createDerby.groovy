@@ -36,7 +36,7 @@ omimDS = BioDataSource.OMIM //SysCode: Om
 doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
 cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
 orphaDS = DataSource.register ("On", "OrphaNet").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-meshDS = DataSource.register ("Me", "MeSH descriptor").asDataSource() 
+meshDS = DataSource.register ("Me", "MeSH descriptor").asDataSource() //Not part of BridgeDb yet!! 
 //icd9DS = BioDataSource.ICD9 //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
 //icd10DS = BioDataSource.ICD10 //Not part of BridgeDb yet!! 
 //icd11DS = BioDataSource.ICD11 //Not part of BridgeDb yet!! 
@@ -204,6 +204,37 @@ new File("orpha2wikidata.csv").eachLine { line,number ->
   counter++
   if (counter % commitInterval == 0) {
     println "Info: errors: " + error + " (OrphaNet)"
+    database.commit()
+  }
+}
+//unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
+
+
+// MeSH Descriptor IDs
+counter = 0
+error = 0
+new File("mesh2wikidata.csv").eachLine { line,number ->
+  if (number == 1) return // skip the first line
+
+  fields = line.split(",")
+  rootid = fields[0].substring(31)
+  Xref ref = new Xref(rootid, wikidataDS);
+  if (!genesDone.contains(ref.toString())) {
+    addError = database.addGene(ref);
+    if (addError != 0) println "Error (addGene): " + database.recentException().getMessage()
+    error += addError
+    linkError = database.addLink(ref,ref);
+    if (linkError != 0) println "Error (addLinkItself): " + database.recentException().getMessage()
+    error += linkError
+    genesDone.add(ref.toString())
+  }
+
+  // add external identifiers
+  addXRef(database, ref, fields[1], meshDS, genesDone, linksDone);
+
+  counter++
+  if (counter % commitInterval == 0) {
+    println "Info: errors: " + error + " (MeSH)"
     database.commit()
   }
 }
