@@ -1,0 +1,7 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?disease ?icd9 
+  WHERE {
+    { ?disease wdt:P1692 ?icd9}
+    UNION
+    { ?disease wdt:P493 ?icd9}
+  }
