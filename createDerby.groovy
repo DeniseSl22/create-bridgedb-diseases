@@ -35,8 +35,11 @@ wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
 omimDS = BioDataSource.OMIM //SysCode: Om
 doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
 cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-orphaDS = DataSource.register ("On", "OrphaNet").asDataSource() //Not part of BridgeDb yet!! 
-//meshDS = BioDataSource.MESHID //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
+orphaDS = DataSource.register ("On", "OrphaNet").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
+meshDS = DataSource.register ("Me", "MeSH descriptor").asDataSource() 
+//icd9DS = BioDataSource.ICD9 //Not part of BridgeDb yet!! --> registering unknown SysCode is only allowed for one database(=1 new SySCode).
+//icd10DS = BioDataSource.ICD10 //Not part of BridgeDb yet!! 
+//icd11DS = BioDataSource.ICD11 //Not part of BridgeDb yet!! 
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
