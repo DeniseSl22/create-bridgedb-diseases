@@ -17,9 +17,9 @@ commitInterval = 500
 genesDone = new java.util.HashSet();
 linksDone = new java.util.HashSet();
 
-unitReport = new File("creationNEW.xml")
+//unitReport = new File("creationNEW.xml")
 // unitReport << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-unitReport << "<testsuite tests=\"12\">\n"
+//unitReport << "<testsuite tests=\"12\">\n"
 
 GdbConstruct database = GdbConstructImpl3.createInstance(
   "wikidata_diseases", new DataDerby(), DBConnector.PROP_RECREATE
@@ -371,8 +371,8 @@ new File("names2wikidata.tsv").eachLine { line,number ->
     database.commit()
   }
 }
-unitReport << "  <testcase classname=\"WikidataCreation\" name=\"NamesFound\"/>\n"
-unitReport << "</testsuite>\n"
+//unitReport << "  <testcase classname=\"WikidataCreation\" name=\"NamesFound\"/>\n"
+//unitReport << "</testsuite>\n"
 
 database.commit();
 database.finalize();
