@@ -1,4 +1,5 @@
-// export CLASSPATH=`ls -1 *.jar | tr '\n' ':'`
+@Grab(group='org.bridgedb', module='org.bridgedb.bio', version='3.0.21')
+@Grab(group='org.bridgedb', module='org.bridgedb.rdb.construct', version='3.0.21')
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +9,7 @@ import groovy.xml.slurpersupport.NodeChildren;
 import org.bridgedb.IDMapperException;
 import org.bridgedb.DataSource;
 import org.bridgedb.Xref;
-import org.bridgedb.bio.BioDataSource;
+import org.bridgedb.bio.DataSourceTxt;
 import org.bridgedb.rdb.construct.DBConnector;
 import org.bridgedb.rdb.construct.DataDerby;
 import org.bridgedb.rdb.construct.GdbConstruct;
@@ -31,16 +32,17 @@ database.preInsert();
 blacklist = new HashSet<String>();
 //blacklist.add("C00350") //Example of blacklist item.
 
-////Registering Datasources to create mappings
-wikidataDS = DataSource.register ("Wd", "Wikidata").asDataSource()
-omimDS = BioDataSource.OMIM //SysCode: Om
-doDS = DataSource.register ("Do", "Disease Ontology").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-cuiDS = DataSource.register ("Cu", "UMLS CUI").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-orphaDS = DataSource.register ("On", "OrphaNet").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-meshDS = DataSource.register ("Me", "MeSH descriptor").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
-icd9DS = DataSource.register ("ICD9", "ICD-9").asDataSource() //Syscode part of BridgeDb library (not released officially yet)..
-icd10DS = DataSource.register ("ICD10", "ICD-10").asDataSource() //Syscode part of BridgeDb library (not released officially yet). 
-icd11DS = DataSource.register ("ICD11", "ICD-11").asDataSource() //Syscode part of BridgeDb library (not released officially yet).
+// Registering Datasources to create mappings
+DataSourceTxt.init()
+wikidataDS = DataSource.getExistingBySystemCode("Wd")
+omimDS = DataSource.getExistingBySystemCode("Om")
+doDS = DataSource.getExistingBySystemCode("Do")
+cuiDS = DataSource.getExistingBySystemCode("Cu")
+orphaDS = DataSource.getExistingBySystemCode("On")
+meshDS = DataSource.getExistingBySystemCode("Me")
+icd9DS = DataSource.getExistingBySystemCode("ICD9")
+icd10DS = DataSource.getExistingBySystemCode("ICD10")
+icd11DS = DataSource.getExistingBySystemCode("ICD11")
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
