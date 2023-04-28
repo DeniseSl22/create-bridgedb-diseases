@@ -43,6 +43,7 @@ meshDS = DataSource.getExistingBySystemCode("Me")
 icd9DS = DataSource.getExistingBySystemCode("ICD9")
 icd10DS = DataSource.getExistingBySystemCode("ICD10")
 icd11DS = DataSource.getExistingBySystemCode("ICD11")
+mondoDS = DataSource.register ("Mo", "MONDO").asDataSource()
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
@@ -333,6 +334,39 @@ new File("icd112wikidata.csv").eachLine { line,number ->
   }
 }
 //unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
+
+
+//mondoDS 
+counter = 0
+error = 0
+new File("icd112wikidata.csv").eachLine { line,number ->
+  if (number == 1) return // skip the first line
+
+  fields = line.split(",")
+  rootid = fields[0].substring(31)
+  Xref ref = new Xref(rootid, wikidataDS);
+  if (!genesDone.contains(ref.toString())) {
+    addError = database.addGene(ref);
+    if (addError != 0) println "Error (addGene): " + database.recentException().getMessage()
+    error += addError
+    linkError = database.addLink(ref,ref);
+    if (linkError != 0) println "Error (addLinkItself): " + database.recentException().getMessage()
+    error += linkError
+    genesDone.add(ref.toString())
+  }
+
+  // add external identifiers
+  addXRef(database, ref, fields[1], mondoDS, genesDone, linksDone);
+
+  counter++
+  if (counter % commitInterval == 0) {
+    println "Info: errors: " + error + " (Mondo)"
+    database.commit()
+  }
+}
+//unitReport << "  <testcase classname=\"WikidataCreation\" name=\"CASNumbersFound\"/>\n" //Not implemented (yet) for disease IDs.
+
+
 
 
 

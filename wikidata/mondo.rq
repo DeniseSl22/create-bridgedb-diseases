@@ -1,0 +1,5 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT DISTINCT ?disease ?mondo 
+  WHERE {
+    { ?disease wdt:P5270 ?mondo}
+  }

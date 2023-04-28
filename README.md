@@ -57,7 +57,7 @@ However, you can also use the below curl command line operations.
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/icd9.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o icd92wikidata.csv
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/icd10.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o icd102wikidata.csv
   curl -H "Accept: text/csv" --data-urlencode query@wikidata/icd11.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o icd112wikidata.csv
-  
+  curl -H "Accept: text/csv" --data-urlencode query@wikidata/mondo.rq -G https://query.wikidata.org/bigdata/namespace/wdq/sparql -o mondo2wikidata.csv  
   ```
 
 4.2 Get Disease Labels
