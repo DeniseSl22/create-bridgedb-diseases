@@ -1,7 +1,7 @@
 Create BridgeDb Identity Mapping files
 ======================================
 
-This groovy script creates a Derby file for BridgeDb [1,2] for use in PathVisio,
+This Groovy script creates a Derby file for BridgeDb [1,2] for use in PathVisio,
 etc.
 
 The script will be tested with Wikidata [3,4] from November 2019, and is based on the [create_bridgedb_metabolites repository](https://github.com/bridgedb/create-bridgedb-metabolites)
@@ -17,9 +17,9 @@ Everyone can contribute ID mappings to Wikidata.
 Releases
 --------
 
-The files are released via the BridgeDb Website: #Fix link: http://www.bridgedb.org/mapping-databases/hmdb-metabolite-mappings/
+The files are released via the BridgeDb Website: https://www.bridgedb.org/data/gene_database/
 
-The mapping files are also archived on Figshare: #Fix link: https://figshare.com/search?q=metabolite+bridgedb+mapping+database&quick=1
+The mapping files are also archived on Figshare: https://figshare.com/search?q=diseases+bridgedb+mapping+database&quick=1
 
 License
 -------
