@@ -1,3 +1,5 @@
+@GrabResolver(name='oss.sonatype.org-snapshot', root='http://oss.sonatype.org/content/repositories/snapshots')
+
 @Grab(group='org.bridgedb', module='org.bridgedb.bio', version='3.0.22-SNAPSHOT')
 @Grab(group='org.bridgedb', module='org.bridgedb.rdb.construct', version='3.0.22-SNAPSHOT')
 
