@@ -45,7 +45,7 @@ meshDS = DataSource.getExistingBySystemCode("Me")
 icd9DS = DataSource.getExistingBySystemCode("ICD9")
 icd10DS = DataSource.getExistingBySystemCode("ICD10")
 icd11DS = DataSource.getExistingBySystemCode("ICD11")
-mondoDS = DataSource.register ("Mo", "MONDO").asDataSource()
+mondoDS = DataSource.getExistingBySystemCode ("Mo")
 
 String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 database.setInfo("BUILDDATE", dateStr);
