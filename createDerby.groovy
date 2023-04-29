@@ -1,5 +1,5 @@
-@Grab(group='org.bridgedb', module='org.bridgedb.bio', version='3.0.21')
-@Grab(group='org.bridgedb', module='org.bridgedb.rdb.construct', version='3.0.21')
+@Grab(group='org.bridgedb', module='org.bridgedb.bio', version='3.0.22-SNAPSHOT')
+@Grab(group='org.bridgedb', module='org.bridgedb.rdb.construct', version='3.0.22-SNAPSHOT')
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
